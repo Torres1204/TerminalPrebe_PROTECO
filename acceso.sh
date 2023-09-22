@@ -1,38 +1,30 @@
 #!/bin/bash
+
 intentos=3
-#funcion para validar datos del usuario
-validar(){
-	local user="$1"
-	local pass="$2"
-	local passEncriptada=$(sudo grep "^$user:" /etc/shadow | cut -d: -f2)
-	if [ -n "$passEncriptada" ]; then
-		if sudo sh -c "echo '$pass' | openssl passwd -6 -stdin -salt $(echo $passEncriptada | cut -d\$ -f3) -check $passEncriptada" &>/dev/null; then
-			return 0 #La contraseña esta bien y accede
-		fi
-	fi
-	return 1 #La contraseña esta mal
-}
 
 while [ $intentos -ge 0 ]; do
-	echo "Ingrese el usuario: "
-	read user
-	echo "Ingrese la contraseña: "
-	read pass
-	if validar "$user" "$pass"; then
-		intentos=0
-	else
-		if [ $intentos -gt 0 ]; then
-			echo "No se pudo acceder, intente de nuevo"
-		else
-			echo "Llego al limite de intentos"
-			exit 1
-		fi
-	fi
-	intentos=$((intentos-1))
+
+	echo -n "Ingrese el usuario: "
+        read user
+
+	if ! id -u "$user" >/dev/null 2>&1; then
+        	echo "El usuario no existe"
+        	intentos=$((intentos-1))
+    	else
+        	echo -n "Ingrese la contraseña: "
+        	read pass  
+        	echo "Validando contraseña, espere un momento.."
+
+        	# Utiliza el comando 'su' para verificar la contraseña
+        	if su -c "true" "$user" <<< "$pass" >/dev/null 2>&1; then
+            		echo "Contraseña correcta, puede ingresar."
+            		echo "meter las funciones"
+            		exit 0
+        	else
+            		echo "Contraseña incorrecta"
+            		intentos=$((intentos-1))
+        	fi
+    	fi
 done
-echo -e "------------------------------------------------------------\n-"
-echo -e "                     Bienvenido $user\n"
-echo -e "-------------------------------------------------------------\n"
-        
-        
-    
+
+echo "Llegó al límite de intentos, reintente más tarde"
