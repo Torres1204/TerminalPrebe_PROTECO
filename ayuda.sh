@@ -1,7 +1,4 @@
 #!/bin/bash
-printf "\nPresiona enter para continuar"
-read
-clear
 printf "\n\n" 
 echo -e "Nombre del equipo: $(uname -n)\n"
 printf "\t\t\tBienvenido $USER \n"

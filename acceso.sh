@@ -21,6 +21,9 @@ while [ $intentos -ge 0 ]; do
         	# Utiliza el comando 'su' para verificar la contraseña
         	if su -c "true" "$user" <<< "$pass" >/dev/null 2>&1; then
             		printf "\nContraseña correcta, puede ingresar."
+					printf "\nPresiona enter para continuar"
+					read
+					clear
 					./ayuda.sh
 					./terminal.sh
             		exit 0
@@ -33,4 +36,4 @@ while [ $intentos -ge 0 ]; do
     	fi
 done
 
-echo "Llegó al límite de intentos, reintente más tarde"
+printf "\n\tLlegó al límite de intentos, reintente más tarde"

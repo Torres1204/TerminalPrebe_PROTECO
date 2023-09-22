@@ -1,6 +1,7 @@
 #!/bin/bash
 exit(){
-    printf "\ncomando invalido\n"
+    printf "\n"
+    printf "\t\tcomando invalido"
 }
 trap ' ' INT SIGINT SIGTSTP SIGTERM
 stty susp ^0 #ignora Ctrl+bandera
@@ -8,6 +9,7 @@ opcion=""
 
 while true; do
     ruta="$(pwd)"
+    printf "\n\n"
     printf "$USER"":~""$ruta""$ "
     read opcion
 
