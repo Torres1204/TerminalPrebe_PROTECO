@@ -4,25 +4,30 @@ intentos=3
 
 while [ $intentos -ge 0 ]; do
 
-	echo -n "Ingrese el usuario: "
+	clear
+	printf "\n\tIngrese el usuario: "
         read user
 
 	if ! id -u "$user" >/dev/null 2>&1; then
-        	echo "El usuario no existe"
+        	printf "\n\tEl usuario no existe"
+			read 
+			clear
         	intentos=$((intentos-1))
     	else
-        	echo -n "Ingrese la contraseña: "
+        	printf "\n\tIngrese la contraseña: "
         	read pass  
-        	echo "Validando contraseña, espere un momento.."
+        	printf "\nValidando contraseña, espere un momento..\n"
 
         	# Utiliza el comando 'su' para verificar la contraseña
         	if su -c "true" "$user" <<< "$pass" >/dev/null 2>&1; then
-            		echo "Contraseña correcta, puede ingresar."
+            		printf "\nContraseña correcta, puede ingresar."
 					./ayuda.sh
 					./terminal.sh
             		exit 0
         	else
-            		echo "Contraseña incorrecta"
+            		printf "\nContraseña incorrecta"
+					read 
+					clear
             		intentos=$((intentos-1))
         	fi
     	fi
