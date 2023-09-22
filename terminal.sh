@@ -1,6 +1,6 @@
 #!/bin/bash
 exit(){
-    printf "\n comando invalido\n"
+    printf "\ncomando invalido\n"
 }
 trap ' ' INT SIGINT SIGTSTP SIGTERM
 stty susp ^0 #ignora Ctrl+bandera
