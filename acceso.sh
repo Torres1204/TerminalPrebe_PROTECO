@@ -18,7 +18,8 @@ while [ $intentos -ge 0 ]; do
         	# Utiliza el comando 'su' para verificar la contraseña
         	if su -c "true" "$user" <<< "$pass" >/dev/null 2>&1; then
             		echo "Contraseña correcta, puede ingresar."
-            		echo "meter las funciones"
+					./ayuda.sh
+					./terminal.sh
             		exit 0
         	else
             		echo "Contraseña incorrecta"

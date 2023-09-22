@@ -1,9 +1,9 @@
 #!/bin/bash
-#!/bin/bash
-trap ' ' INT
+exit(){
+    printf "\n comando invalido\n"
+}
+trap ' ' INT SIGINT SIGTSTP SIGTERM
 stty susp ^0 #ignora Ctrl+bandera
-mostrar=$(pwd)
-listaComandos=("ayuda","buscar","creditos","infosis","mp3","fechayhora","juego","salir")
 opcion=""
 
 while true; do
@@ -29,7 +29,7 @@ while true; do
         opcion=""
     fi
     if [ "$opcion" == "mp3" ]; then
-        #./mp3.sh
+        ./mp3.sh
         opcion=""
     fi
     if [ "$opcion" == "fechayhora" ]; then
@@ -37,13 +37,13 @@ while true; do
         opcion=""
     fi
     if [ "$opcion" == "juego" ]; then
-        #./juego.sh
+        ./juego.sh
         opcion=""
     fi
 
     if [ "$opcion" == "salir" ]; then
         opcion=""
-        exit 1
+        break
     fi
     $opcion
 done
