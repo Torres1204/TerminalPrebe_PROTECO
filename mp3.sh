@@ -131,7 +131,7 @@ main()
 	trap ' ' INT SIGINT SIGTSTP SIGTERM
 	opcion=0
 	lugarMusica="$HOME/Música" # Obtenemos la ruta de la música
-	imprimirTitulo 
+	imprimir_logo 
 	comprobarmpg123
 	
 	while [ "$opcion" != 4 ]
