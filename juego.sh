@@ -88,6 +88,8 @@ mostrar_palabra_oculta()
 }
 
 # Solicitar una palabra al usuario
+clear
+printf "\n"
 echo -n "Ingresa una palabra para adivinar: "
 read palabra
 
